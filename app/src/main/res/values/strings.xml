@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">pract7</string>
+    <string name="pick_departure_date">Pick departure date</string>
+    <string name="pick_seat">Pick seat</string>
+    <string name="pick_returning_date">Pick returning date</string>
+    <string name="your_ticket">Your ticket</string>
+    <string name="departure_date">Departure date: %s</string>
+    <string name="returning_date">Returning date: %s</string>
+    <string name="seat">Seat: %s</string>
+    <string name="not_chosen">Not chosen</string>
+    <string name="submit">Submit</string>
+    <string name="row">Row</string>
+    <string name="chair">Chair</string>
+    <string name="select_date">Select date</string>
+</resources>

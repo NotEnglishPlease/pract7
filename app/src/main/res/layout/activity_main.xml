@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.MainActivity">
+
+    <ImageView
+        android:id="@+id/iconImageView"
+        android:layout_width="238dp"
+        android:layout_height="226dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/airplane_svgrepo_com"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/departureDateButton"
+        android:layout_width="238dp"
+        android:layout_height="wrap_content"
+        android:text="@string/pick_departure_date"
+        app:layout_constraintBottom_toTopOf="@+id/returningDateButton"
+        app:layout_constraintEnd_toEndOf="@+id/returningDateButton"
+        app:layout_constraintStart_toStartOf="@+id/returningDateButton"
+        app:layout_constraintTop_toBottomOf="@+id/iconImageView"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <Button
+        android:id="@+id/seatButton"
+        android:layout_width="238dp"
+        android:layout_height="wrap_content"
+        android:text="@string/pick_seat"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/iconImageView"
+        app:layout_constraintStart_toStartOf="@+id/iconImageView"
+        app:layout_constraintTop_toBottomOf="@+id/returningDateButton" />
+
+    <Button
+        android:id="@+id/returningDateButton"
+        android:layout_width="238dp"
+        android:layout_height="wrap_content"
+        android:text="@string/pick_returning_date"
+        app:layout_constraintBottom_toTopOf="@+id/seatButton"
+        app:layout_constraintEnd_toEndOf="@+id/seatButton"
+        app:layout_constraintStart_toStartOf="@+id/seatButton"
+        app:layout_constraintTop_toBottomOf="@+id/departureDateButton" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:cardCornerRadius="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/iconImageView"
+        app:layout_constraintStart_toStartOf="@+id/iconImageView"
+        app:layout_constraintTop_toBottomOf="@+id/iconImageView">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="16dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/ticketTitleTextView"
+                style="@style/TextAppearance.Material3.TitleMedium"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/your_ticket" />
+
+            <TextView
+                android:id="@+id/departureDateTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/departure_date" />
+
+            <TextView
+                android:id="@+id/returningDateTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="@string/returning_date" />
+
+            <TextView
+                android:id="@+id/seatTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/seat" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
