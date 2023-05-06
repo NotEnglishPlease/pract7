@@ -3,13 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:versionCode="1"
     android:versionName="1.0">
+    <!-- Установка версии приложения -->
 
+    <!-- Установка версии sdk -->
     <uses-sdk
         android:minSdkVersion="25"
         android:targetSdkVersion="33" />
 
+    <!-- Разрешение на использование интернета -->
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <!-- Установка поддержки экранов -->
     <supports-screens
         android:largeScreens="true"
         android:normalScreens="true"

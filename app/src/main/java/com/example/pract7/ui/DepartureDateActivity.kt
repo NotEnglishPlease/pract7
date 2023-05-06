@@ -9,6 +9,12 @@ import com.example.pract7.databinding.ActivityDepartureDateBinding
 import com.example.pract7.model.TicketOrder
 import com.google.android.material.datepicker.MaterialDatePicker
 
+
+/**
+ * Активность выбора даты отправления
+ *
+ * аналогично ReturningDateActivity.kt
+ */
 class DepartureDateActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDepartureDateBinding
