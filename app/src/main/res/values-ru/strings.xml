@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">pract7</string>
+    <string name="pick_departure_date">Выберите дату полёта</string>
+    <string name="pick_seat">Выбериет место</string>
+    <string name="pick_returning_date">Выберите дату возвращения</string>
+    <string name="your_ticket">Ваш билет</string>
+    <string name="departure_date">Дата полёта: %s</string>
+    <string name="returning_date">Дата возврата: %s</string>
+    <string name="seat">Место: %s</string>
+    <string name="not_chosen">Не выбрано</string>
+    <string name="submit">Подтвердить</string>
+    <string name="row">Ряд</string>
+    <string name="chair">Кресло</string>
+    <string name="select_date">Выберите дату</string>
+</resources>

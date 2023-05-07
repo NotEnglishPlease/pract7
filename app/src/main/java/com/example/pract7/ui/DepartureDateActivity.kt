@@ -1,14 +1,20 @@
 package com.example.pract7.ui
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import com.example.pract7.R
 import com.example.pract7.databinding.ActivityDepartureDateBinding
 import com.example.pract7.model.TicketOrder
 import com.google.android.material.datepicker.MaterialDatePicker
 
+
+/**
+ * Активность выбора даты отправления
+ *
+ * аналогично ReturningDateActivity.kt
+ */
 class DepartureDateActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDepartureDateBinding
@@ -38,7 +44,7 @@ class DepartureDateActivity : AppCompatActivity() {
 
         binding.submitDepartureDateButton.setOnClickListener {
             setResult(RESULT_OK, Intent().putExtra("ticketOrder", ticketOrder))
-            Log.d("aaa", "departureResult: ${ticketOrder.departureDate}")
+            Log.d("TicketOrder", "onCreate: " + ticketOrder.departureDate)
             finish()
         }
     }

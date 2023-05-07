@@ -2,36 +2,43 @@ package com.example.pract7.ui
 
 import android.app.Activity
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
-import com.example.pract7.R
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
+import com.example.pract7.R
 import com.example.pract7.databinding.ActivityMainBinding
 import com.example.pract7.model.TicketOrder
 
 class MainActivity : AppCompatActivity() {
 
+    // Создаем объект класса ActivityMainBinding, будем использовать его для получения доступа к элементам интерфейса
     private lateinit var binding: ActivityMainBinding
+
+    // Создаем объект класса TicketOrder, будем использовать его для передачи данных между активити
     private lateinit var ticketOrder: TicketOrder
 
+    // Создаем контракты для получения данных из других активити
+    // Первый контракт для получения даты отправления
     private val departureDateActivityResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            // Проверяем, что результат получен успешно
             if (result.resultCode == Activity.RESULT_OK) {
+                // Получаем объект класса TicketOrder из возвращенных данных
                 val returnedTicketOrder =
                     result.data?.getParcelableExtra<TicketOrder>("ticketOrder")!!
-                Log.d("aaa", "departureResult: ${returnedTicketOrder.departureDate}")
+                // Получаем дату отправления из объекта TicketOrder
+                // если дата не выбрана, то возвращаем строку "Не выбрана"
                 val date =
-                    returnedTicketOrder.departureDate
+                    returnedTicketOrder.departureDate.ifEmpty { getString(R.string.not_chosen) }
+                // Записываем дату отправления в объект ticketOrder
                 ticketOrder.departureDate = date
-                binding.departureDateTextView.text = getString(
-                    R.string.departure_date,
-                    date.ifEmpty { getString(R.string.not_chosen) })
-                Log.d("TicketOrder", date)
+                // Записываем дату отправления в TextView
+                binding.departureDateTextView.text = getString(R.string.departure_date, date)
             }
         }
 
+    // Второй контракт для получения даты возвращения
+    // Все аналогично первому контракту
     private val returningDateActivityResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
@@ -44,13 +51,15 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+    // Третий контракт для получения места
+    // Все аналогично первому контракту
     private val seatActivityResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
                 val returnedTicketOrder =
                     result.data?.getParcelableExtra<TicketOrder>("ticketOrder")
-                val seat = returnedTicketOrder?.seat ?: getString(R.string.not_chosen)
-                ticketOrder.seat = seat
+                val seat = returnedTicketOrder?.seat?.ifEmpty { getString(R.string.not_chosen) }
+                ticketOrder.seat = seat!!
                 binding.seatTextView.text = getString(R.string.seat, seat)
             }
         }
@@ -58,36 +67,56 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Будем использовать ViewBinding для получения доступа к элементам интерфейса
+        // это позволит избежать использования функции findViewById
+
+        // Инициализируем объект класса ActivityMainBinding
         binding = ActivityMainBinding.inflate(layoutInflater)
+        // Устанавливаем полученный интерфейс для активити
         setContentView(binding.root)
 
+        // Инициализируем объект класса TicketOrder
         ticketOrder = TicketOrder()
 
-        //initFields()
+        // Инициализируем поля интерфейса
+        initFields()
 
+        // Устанавливаем обработчики нажатий на кнопки
         binding.departureDateButton.setOnClickListener {
-            Log.d("TicketOrder", "onCreate: sent: ${ticketOrder.toString()}")
-            val departureDateIntent = Intent(this, DepartureDateActivity::class.java)
-            departureDateIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            departureDateIntent.putExtra("ticketOrder", ticketOrder)
-            departureDateActivityResult.launch(departureDateIntent)
+            // Создаем явный интент для перехода на активити выбора даты отправления
+            val intent = Intent(this, DepartureDateActivity::class.java)
+            // Передаем объект класса TicketOrder в активити выбора даты отправления
+            intent.putExtra("ticketOrder", ticketOrder)
+            // Добавляем флаг FLAG_ACTIVITY_CLEAR_TOP, чтобы при возврате на это активити
+            // не создавалось новое активити, а использовалось уже существующее
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            // Запускаем активити выбора даты отправления
+            departureDateActivityResult.launch(intent)
         }
 
+        // Все аналогично первой кнопке
         binding.returningDateButton.setOnClickListener {
-            val returningDateIntent = Intent(this, ReturningDateActivity::class.java)
-            returningDateIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            returningDateIntent.putExtra("ticketOrder", ticketOrder)
-            returningDateActivityResult.launch(returningDateIntent)
+            val intent = Intent(this, ReturningDateActivity::class.java)
+            intent.putExtra("ticketOrder", ticketOrder)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            returningDateActivityResult.launch(intent)
         }
 
+        // Все аналогично первой кнопке
         binding.seatButton.setOnClickListener {
-            val seatIntent = Intent(this, PickSeatsActivity::class.java)
-            seatIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-            seatIntent.putExtra("ticketOrder", ticketOrder)
-            seatActivityResult.launch(seatIntent)
+            val intent = Intent(this, PickSeatsActivity::class.java)
+            intent.putExtra("ticketOrder", ticketOrder)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            seatActivityResult.launch(intent)
         }
     }
 
+    /**
+     * Инициализируем поля интерфейса
+     *
+     * Все поля будут иметь значение "Не выбрано"
+     */
     private fun initFields() {
         binding.apply {
             val notChosen = getString(R.string.not_chosen)

@@ -11,7 +11,7 @@
         android:layout_width="238dp"
         android:layout_height="226dp"
         android:layout_marginTop="24dp"
-        android:src="@drawable/airplane_svgrepo_com"
+        android:src="@drawable/airplane"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,7 +24,7 @@
         app:layout_constraintBottom_toTopOf="@+id/returningDateButton"
         app:layout_constraintEnd_toEndOf="@+id/returningDateButton"
         app:layout_constraintStart_toStartOf="@+id/returningDateButton"
-        app:layout_constraintTop_toBottomOf="@+id/iconImageView"
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <Button
@@ -47,14 +47,17 @@
         app:layout_constraintStart_toStartOf="@+id/seatButton"
         app:layout_constraintTop_toBottomOf="@+id/departureDateButton" />
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardView"
+        style="@style/Widget.Material3.CardView.Elevated"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
         app:cardCornerRadius="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/iconImageView"
-        app:layout_constraintStart_toStartOf="@+id/iconImageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iconImageView">
 
         <LinearLayout
@@ -68,8 +71,10 @@
                 style="@style/TextAppearance.Material3.TitleMedium"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:gravity="center"
-                android:text="@string/your_ticket" />
+                android:text="@string/your_ticket"
+                android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/departureDateTextView"
@@ -77,13 +82,27 @@
                 android:layout_height="wrap_content"
                 android:text="@string/departure_date" />
 
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:background="?android:attr/listDivider" />
+
             <TextView
                 android:id="@+id/returningDateTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:text="@string/returning_date" />
+
+            <View
+                android:id="@+id/divider2"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
-                android:text="@string/returning_date" />
+                android:background="?android:attr/listDivider" />
 
             <TextView
                 android:id="@+id/seatTextView"
@@ -91,6 +110,6 @@
                 android:layout_height="wrap_content"
                 android:text="@string/seat" />
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
